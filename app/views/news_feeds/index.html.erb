@@ -1,0 +1,28 @@
+<%- model_class = NewsFeed -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:url) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @news_feeds.each do |news_feed| %>
+      <tr>
+        <td><%= modulo10(news_feed.id) %></td>
+        <td><%= news_feed.title %></td>
+        <td><%= link_to "Link", news_feed.url %></td>
+        <td><%= news_feed.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_news_feed_path,
+            :class => 'btn btn-primary' %>
